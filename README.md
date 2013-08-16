@@ -9,7 +9,7 @@ try to build deb packages and handle dependencies automatically
 Required
 ========
 Package and it's dependencies:
-devscripts bash
+devscripts bash tmux
 
 And you need to be root!
 
@@ -31,6 +31,7 @@ It's very simple!
 
 Usage
 =====
+start a tmux session and run:
 ./build.sh Package1 Package2 ... Package-N
 
 Notes
