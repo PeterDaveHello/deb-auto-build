@@ -1,5 +1,11 @@
 #!/bin/bash -x
 
+tmux rename-window "updating apt db"
+apt-get update
+
+tmux rename-window "upgrading packages"
+apt-get upgrade --force-yes -y
+
 REPO="dists/wheezy-sh4/main/binary-sh4"
 
 function build_sub_package()
