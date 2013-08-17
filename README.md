@@ -1,10 +1,12 @@
 This is a beta verion
 =====================
-no dangerous and harm, but it's not complete!
+No dangerous and harm, but it's not complete!
 
-wheezy-sh4-deb-auto-build
+deb-auto-build
 =========================
-try to build deb packages and handle dependencies automatically
+Try to build deb packages and handle dependencies automatically.
+
+Because we use Debian-wheezy on a sh4 platform, there is no official binary repository and support, we need to build the packages from source by ourselves, but the dependencies of packages make people crazy, we need a solution to handle it, so I an writing this shell script for a practice.
 
 Required
 ========
@@ -15,7 +17,7 @@ And you need to be root!
 
 Before use it
 ============
-var REPO is  a local apt repo's path
+varible REPO in the script is a local apt repo's path
 
 You need to check the path in the script is correct for you.
 
