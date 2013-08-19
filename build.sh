@@ -25,6 +25,7 @@ function build_a_package()
         tmux rename-window "building-dep $package"
         apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'cannot be found' | cut -d ' ' -f 12 | build_sub_package
         apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'but it is not going to be installed' | cut -d ' ' -f 5 | build_sub_package
+        apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'but it is not installable' | cut -d ' ' -f 5 | build_sub_package
         apt-get build-dep "$package" --force-yes -y
     done
     tmux rename-window "building $package"
