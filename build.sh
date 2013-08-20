@@ -11,20 +11,11 @@ function build_sub_package()
 
 function build_a_package()
 {
-    package=$1
-    echo $package;
-    $?=123
-    until [ "$?" -eq 0 ]
-    do
-        tmux rename-window "building-dep $package"
-        apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'cannot be found' | cut -d ' ' -f 12 | build_sub_package
-        apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'but it is not going to be installed' | cut -d ' ' -f 5 | build_sub_package
-        apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'but it is not installable' | cut -d ' ' -f 5 | build_sub_package
-        apt-get build-dep "$package" --force-yes -y
-    done
-    tmux rename-window "building $package"
-    apt-get -b source "$package" \
-    && tmux rename-window "moving $package" \
+    build_a_package_dep $1;
+    echo "now building $1 ...";
+    tmux rename-window "building $1"
+    apt-get -b source "$1" \
+    && tmux rename-window "moving $1" \
     && mv *.deb ../apt-repo/${REPO} \
     && tmux rename-window "rebuilding repo" \
     && cd ../apt-repo \
@@ -37,16 +28,15 @@ function build_a_package()
 
 function build_a_package_dep()
 {
-    package=$1
-    echo $package;
+    echo "now building $1 dep ...";
     $?=123
     until [ "$?" -eq 0 ]
     do
-        tmux rename-window "building-dep $package"
-        apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'cannot be found' | cut -d ' ' -f 12 | build_sub_package
-        apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'but it is not going to be installed' | cut -d ' ' -f 5 | build_sub_package
-        apt-get build-dep "$package" --force-yes -y 2>&1 | grep 'but it is not installable' | cut -d ' ' -f 5 | build_sub_package
-        apt-get build-dep "$package" --force-yes -y
+        tmux rename-window "building-dep $1"
+        apt-get build-dep "$1" --force-yes -y 2>&1 | grep 'cannot be found' | cut -d ' ' -f 12 | build_sub_package
+        apt-get build-dep "$1" --force-yes -y 2>&1 | grep 'but it is not going to be installed' | cut -d ' ' -f 5 | build_sub_package
+        apt-get build-dep "$1" --force-yes -y 2>&1 | grep 'but it is not installable' | cut -d ' ' -f 5 | build_sub_package
+        apt-get build-dep "$1" --force-yes -y
     done
 }
 
