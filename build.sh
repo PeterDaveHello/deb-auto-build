@@ -36,6 +36,7 @@ function build_a_package_dep()
         apt-get build-dep "$1" --force-yes -y 2>&1 | grep 'cannot be found' | cut -d ' ' -f 12 | build_sub_package
         apt-get build-dep "$1" --force-yes -y 2>&1 | grep 'but it is not going to be installed' | cut -d ' ' -f 5 | build_sub_package
         apt-get build-dep "$1" --force-yes -y 2>&1 | grep 'but it is not installable' | cut -d ' ' -f 5 | build_sub_package
+        apt-get build-dep "$1" --force-yes -y 2>&1 | grep 'Failed to satisfy Build-Depends dependency' | cut -d ' ' -f 9 | build_sub_package
         apt-get build-dep "$1" --force-yes -y
     done
 }
