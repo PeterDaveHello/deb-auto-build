@@ -33,8 +33,12 @@ It's very simple! <br />
 
 Usage
 =====
-start a tmux session and run: <br />
+start a tmux session and run(you MUST start a tmux session and run this script in it): <br />
 ./build.sh Package1 Package2 ... Package-N <br />
+ <br />
+or you can run this command for build dep only: <br />
+./build.sh --build-dep-only Package1 Package2 ... Package-N <br />
+
 
 Notes
 =====
