@@ -24,6 +24,7 @@ function build_a_package()
     && tmux rename-window "updating apt db" \
     && apt-get update \
     && cd -
+    rm -rf $1*
 }
 
 function build_a_package_dep()
