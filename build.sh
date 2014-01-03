@@ -20,7 +20,7 @@ function build_a_package()
     && tmux rename-window "rebuilding repo" \
     && cd ../apt-repo \
     && dpkg-scanpackages ${REPO} > ${REPO}/Packages \
-    && gzip -c ${REPO}/Packages > ${REPO}/Packages.gz \
+    && gzip -cv ${REPO}/Packages > ${REPO}/Packages.gz \
     && tmux rename-window "updating apt db" \
     && apt-get update \
     && cd -
